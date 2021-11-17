@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        repo: ['mocoog/go-grpc-packages']
+        repo: ['mocoog/grpc-go-packages']
     steps:
       - uses: actions/checkout@v2
       - name: dispatch target-updated
