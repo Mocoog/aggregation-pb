@@ -22,5 +22,5 @@ jobs:
           repository: ${{ matrix.repo }}
           event-type: target-updated
       - name: test
-        if: ${{ github.event.pull_request.merged }} == true
+        if: github.event.pull_request.merged == true
         run: echo ${{ github.event.pull_request.title }}
