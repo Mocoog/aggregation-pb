@@ -1,9 +1,11 @@
 name: generate
 
 on:
-  pull_request:
+  push:
     branches:
       - main
+    # types:
+    #   - "closed"
 
 jobs:
   pr-hooks:
@@ -20,4 +22,4 @@ jobs:
           repository: ${{ matrix.repo }}
           event-type: target-updated
       - name: test
-        run: echo ${{ github.event.pull_request }}
+        run: echo ${{ github.event.pull_request.title }}
