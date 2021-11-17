@@ -1,0 +1,21 @@
+name: generate
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pr-hooks:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        repo: ['mocoog/grpc-go-packages']
+    steps:
+      - uses: actions/checkout@v2
+      - name: dispatch target-updated
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: target-updated
