@@ -5,7 +5,7 @@ on:
     branches:
       - main
     types:
-      - "closed"
+      - closed
 
 jobs:
   pr-hooks:
@@ -22,4 +22,5 @@ jobs:
           repository: ${{ matrix.repo }}
           event-type: target-updated
       - name: test
+        if: ${{ github.event.pull_request.merged }} == true
         run: echo ${{ github.event.pull_request.title }}
