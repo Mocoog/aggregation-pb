@@ -20,4 +20,4 @@ jobs:
           repository: ${{ matrix.repo }}
           event-type: target-updated
       - name: test
-        run: echo ${{ github.event.pull_request }}
+        run: echo ${{ github.event.pull_request.title }}
