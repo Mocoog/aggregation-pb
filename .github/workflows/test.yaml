@@ -31,4 +31,5 @@ jobs:
         if: env.SERVICE_NAME != ''
         run: |
           echo ${{ env.SERVICE_NAME }}
-          [ -d ${{ env.SERVICE_NAME }} ]
+          [ -d ${{ env.SERVICE_NAME }} ]; then
+            echo 'aaaaaa'
