@@ -2,7 +2,7 @@ name: test
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, synchronize]
 
 jobs:
   ls-test:
@@ -22,7 +22,7 @@ jobs:
           script: |
             const prTitle = env.PR_TITLE
             if (prTitle.match(/:/)) {
-              return prTitle.split(':')[0] === '' ??
+              return prTitle.split(':')[0] === '' ?
                 core.setFailed('Not setup service name!')
                 : prTitle.split(':')[0]
             }
