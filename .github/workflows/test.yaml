@@ -32,4 +32,4 @@ jobs:
         run: |
           echo ${{ env.SERVICE_NAME }}
           if [ ! -d ${{ env.SERVICE_NAME }} ];then
-            exit 1
+            exit 0
