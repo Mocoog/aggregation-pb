@@ -15,11 +15,11 @@ jobs:
         repo: ['mocoog/grpc-go-packages']
     steps:
       - uses: actions/checkout@v2
-      - name: dispatch update-pb
+      - name: dispatch compile-pb
         if: github.event.pull_request.merged == true
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           repository: ${{ matrix.repo }}
-          event-type: update-pb
+          event-type: compile-pb
           client-payload: '{"pr_title": "${{ github.event.pull_request.title }}"}'
