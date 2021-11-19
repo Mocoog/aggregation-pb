@@ -29,6 +29,4 @@ jobs:
         env:
           SERVICE_NAME: ${{ steps.checkColon.outputs.result }}
         if: env.SERVICE_NAME != ''
-        run: |
-          echo "== ls =="
-          ls
+        run: exit && test -d env.SERVICE_NAME
