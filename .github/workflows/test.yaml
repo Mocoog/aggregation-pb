@@ -7,8 +7,6 @@ on:
 jobs:
   ls-test:
     runs-on: ubuntu-20.04
-    env:
-      PR_TITLE: ${{ github.event.pull_request.title }}
     steps:
       - name: Check out
         uses: actions/checkout@v2
@@ -20,7 +18,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const prTitle = env.PR_TITLE
+            const prTitle = process.env.PR_TITLE
             if (prTitle.match(/:/)) {
               return prTitle.split(':')[0] === '' ?
                 core.setFailed('Not setup service name!')
