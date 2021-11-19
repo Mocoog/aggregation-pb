@@ -1,0 +1,34 @@
+name: test
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-directory:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: def checkColon
+        id: checkColon
+        uses: actions/github-script@v3
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        with:
+          result-encoding: string
+          script: |
+            const prTitle = process.env.PR_TITLE
+            if (prTitle.match(/:/)) {
+              return prTitle.split(':')[0] === '' ?
+                core.setFailed('Not setup service name!')
+                : prTitle.split(':')[0]
+            }
+            return ''
+      - name: test target service
+        env:
+          SERVICE_NAME: ${{ steps.checkColon.outputs.result }}
+        if: env.SERVICE_NAME != ''
+        run: |
+          echo ${{ env.SERVICE_NAME }}
+          test -d ${{ env.SERVICE_NAME }}
