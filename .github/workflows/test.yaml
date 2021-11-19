@@ -30,7 +30,7 @@ jobs:
       - name: test target service
         env:
           SERVICE_NAME: ${{ steps.checkColon.outputs.result }}
-        if: process.env.SERVICE_NAME != ''
+        if: env.SERVICE_NAME != ''
         run: |
           echo "== ls =="
           ls
