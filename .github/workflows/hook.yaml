@@ -14,9 +14,23 @@ jobs:
       matrix:
         repo: ['mocoog/grpc-go-packages']
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: merged check
+        if: github.event.pull_request.merged != true
+        run: exit 1
+      - name: def checkRunCompile
+        uses: actions/github-script@v3
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        id: checkRunCompile
+        with:
+          result-encoding: string
+          script: |
+            const prTitle = process.env.PR_TITLE
+            return prTitle.match(/:/) ? prTitle : ''
       - name: dispatch compile-pb
-        if: github.event.pull_request.merged == true
+        if: steps.checkRunCompile.outputs.result != ''
         uses: peter-evans/repository-dispatch@v1
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
