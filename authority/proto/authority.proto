@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package authority;
+option go_package = "/authority/proto";
+
+service AuthorityService {
+    rpc SignUp (SignUpRequest) returns (SignUpResponse);
+}
+
+message SignUpRequest {
+    string session_id = 1;
+}
+
+message SignUpResponse {
+    User user = 1;
+}
+
+message User {
+    string id = 1;
+    string role = 2;
+}
