@@ -1,21 +1,37 @@
+/**
+ * Authenticate the user.
+ *
+ */
 syntax = "proto3";
 
 package authority;
 option go_package = "/authority/proto";
 
+/**
+ * Services related to user authentication
+ */
 service AuthorityService {
+    // Register a user
     rpc SignUp (SignUpRequest) returns (SignUpResponse);
 }
 
+//** Message to be requested during user registration */
 message SignUpRequest {
-    string session_id = 1;
+    string session_id = 1;  // The session_id received from the client
 }
 
+
+// Message to be returned upon user registration
 message SignUpResponse {
     User user = 1;
 }
 
+/**
+ * Users to be used between services
+ */
 message User {
+    // Unique ID across services
     string id = 1;
+    // The permissions that the user has.
     string role = 2;
 }
