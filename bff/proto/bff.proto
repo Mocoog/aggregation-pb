@@ -1,0 +1,49 @@
+/**
+ * Backends for Frontend.
+ *
+ */
+syntax = "proto3";
+
+package bff;
+option go_package = "/bff/proto";
+
+service BFFService {
+    // Request user registration.
+    // rpc RegisterUser (SignUpRequest) returns (SignUpResponse);
+
+    // Health Check
+    rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message HealthCheckRequest {
+    // service status
+    int32 status = 1;
+}
+
+message HealthCheckResponse {
+    // service status
+    int32 status = 1;
+}
+
+//** Message to be requested during user registration */
+// message SignUpRequest {
+//     string session_id = 1;  // The session_id received from the client
+// }
+
+
+// Message to be returned upon user registration
+// message SignUpResponse {
+//     User user = 1;
+//     // Success: 200, Bad Request: 400
+//     int32 status = 2;
+// }
+
+/**
+ * Users to be used between services
+ */
+// message User {
+//     // Unique ID across services
+//     string id = 1;
+//     // The permissions that the user has.
+//     string role = 2;
+// }
